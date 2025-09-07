@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daily Exam</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
+    />
+    <style>
+      body {
+        font-family: "Hind Siliguri", sans-serif;
+        background-color: #f4f4f9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px;
+      }
+      .subject-container {
+        background-color: white;
+        padding: 10px 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: 300px;
+        position: relative;
+      }
+      .subject-heading {
+        font-size: 30px;
+        font-weight: 700;
+        color: #1b0b58;
+        text-align: center;
+        margin-bottom: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+      .subject-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .subject-button {
+        background-color: #1b0b58;
+        color: white;
+        border: none;
+        padding: 14px 20px;
+        font-size: 18px;
+        font-weight: 500;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        text-align: center;
+        text-decoration: none;
+        font-family: "Hind Siliguri", sans-serif;
+        position: relative;
+        overflow: hidden;
+      }
+      .subject-button:hover {
+        background-color: #2a1a7a;
+        transform: translateY(-2px);
+      }
+      .subject-button:active {
+        transform: translateY(0);
+      }
+      .live-button {
+        background-color: #ff5722;
+        box-shadow: 0 0 15px rgba(255, 87, 34, 0.5);
+        animation: pulse 1.5s infinite;
+      }
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.02);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+      .live-badge {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background-color: #f44336;
+        color: white;
+        font-size: 12px;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-weight: 700;
+      }
+      .upcoming-badge {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background-color: #4caf50;
+        color: white;
+        font-size: 10px;
+        padding: 2px 5px;
+        border-radius: 3px;
+        font-weight: 700;
+      }
+      .archive-button-container {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+      }
+      .archive-button {
+        background-color: #1b0b58;
+        color: white;
+        border: none;
+        padding: 5px 8px;
+        font-size: 12px;
+        font-weight: 500;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        font-family: "Hind Siliguri", sans-serif;
+      }
+      .archive-button:hover {
+        background-color: #2a1a7a;
+      }
+      .popup {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+      }
+      .popup-content {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        max-width: 250px; /* Reduced max-width for smaller popup */
+        width: 90%;
+        position: relative;
+        text-align: center;
+        max-height: 80vh;
+        overflow-y: auto;
+      }
+      .popup-heading {
+        color: #1b0b58;
+      }
+      .close-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 20px;
+        cursor: pointer;
+      }
+      .popup-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 15px;
+      }
+      .popup-list .subject-button {
+        background-color: #1b0b58;
+        color: white;
+        border: none;
+        padding: 12px 15px; /* Reduced padding for smaller buttons */
+        font-size: 15px; /* Reduced font size */
+        font-weight: 500;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        text-align: center;
+        text-decoration: none;
+        width: 100%; /* Full width within the popup */
+        box-sizing: border-box; /* Include padding and border in the element's total width */
+      }
+      .popup-list .subject-button:hover {
+        background-color: #2a1a7a;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="subject-container">
+      <h1 class="subject-heading">ডেইলি এক্স্যাম</h1>
+      <div class="archive-button-container">
+        <button id="archiveBtn" class="archive-button">আর্কাইভ</button>
+      </div>
+      <div class="subject-list">
+        <a href="https://medicalprostuti.github.io/daily1/" class="subject-button live-button">
+          ডেইলি-01
+          <span class="live-badge">Live</span>
+        </a>
+        <a href="#" class="subject-button upcoming-button">
+          ডেইলি-০২ 
+          <span class="upcoming-badge">UPCOMING</span>
+        </a>
+        <a href="#" class="subject-button upcoming-button">
+          ডেইলি-০৩
+          <span class="upcoming-badge">UPCOMING</span>
+        </a>
+        <a href="#" class="subject-button upcoming-button">
+          ডেইলি-০৪
+          <span class="upcoming-badge">UPCOMING</span>
+        </a>
+        <a href="#" class="subject-button upcoming-button">
+          ডেইলি-০৫
+          <span class="upcoming-badge">UPCOMING</span>
+        </a>
+        <a href="#" class="subject-button upcoming-button">
+          ডেইলি-০৬
+          <span class="upcoming-badge">UPCOMING</span>
+        </a>
+        <a href="#" class="subject-button upcoming-button">
+          ডেইলি-০৭
+          <span class="upcoming-badge">UPCOMING</span>
+        </a>
+        <a href="#" class="subject-button upcoming-button">
+          ডেইলি-০৮
+          <span class="upcoming-badge">UPCOMING</span>
+        </a>
+      </div>
+    </div>
+    <div id="archivePopup" class="popup">
+      <div class="popup-content">
+        <span class="close-button" id="closePopupBtn">&times;</span>
+        <h2 class="popup-heading">আর্কাইভ এক্স্যাম</h2>
+        <div class="popup-list">
+          <a href="#" class="subject-button">Null</a>
+          <a href="#" 
+        </div>
+      </div>
+    </div>
+    <script>
+      // JavaScript for the pop-up functionality
+      const archiveBtn = document.getElementById("archiveBtn");
+      const archivePopup = document.getElementById("archivePopup");
+      const closePopupBtn = document.getElementById("closePopupBtn");
+      // Open the pop-up
+      archiveBtn.addEventListener("click", () => {
+        archivePopup.style.display = "flex";
+      });
+      // Close the pop-up
+      closePopupBtn.addEventListener("click", () => {
+        archivePopup.style.display = "none";
+      });
+      // Close the pop-up when clicking outside of it
+      window.addEventListener("click", (event) => {
+        if (event.target === archivePopup) {
+          archivePopup.style.display = "none";
+        }
+      });
+    </script>
+  </body>
+</html>
